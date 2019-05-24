@@ -19,7 +19,8 @@ weatherForm.addEventListener('submit', event => {
   event.preventDefault();
   const location = search.value;
   //console.log(location);
-  const url = `http://localhost:3000/weather?address=${location}`;
+  //const url = `http://localhost:3000/weather?address=${location}`;
+  const url = `/weather?address=${location}`;
 
   forecastMessage.textContent = `Loading forecast`;
   //clear any old message
