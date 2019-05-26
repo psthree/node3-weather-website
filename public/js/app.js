@@ -13,6 +13,7 @@ fetch('http://localhost:3000/weather?address=detroit').then(response => {
 const weatherForm = document.querySelector('form');
 const search = document.querySelector('input');
 const forecastMessage = document.querySelector('#forecast-message');
+const highLowMessage = document.querySelector('#highLow-message');
 const errorMessage = document.querySelector('#error-message');
 
 weatherForm.addEventListener('submit', event => {
@@ -35,6 +36,7 @@ weatherForm.addEventListener('submit', event => {
         console.log(data.location, data.forecast);
         //errorMessage.textContent = `Your forecast for ${data.location}`;
         forecastMessage.textContent = ` ${data.forecast}`;
+        highLowMessage.textContent = ` ${data.highLow}`;
       }
     });
   });

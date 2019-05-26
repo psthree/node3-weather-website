@@ -47,7 +47,7 @@ app.get('/about', (req, res) => {
 
 app.get('/help', (req, res) => {
   res.render('help', {
-    message: 'Help Message',
+    message: 'Help Message contact admin',
     title: 'Help',
     name: 'Studio Gee!'
   });
@@ -72,21 +72,34 @@ app.get('/weather', (req, res) => {
   // = {} is default parameter of a empty object if none is provided
   geocode(
     req.query.address,
-    (error, { latitude, longitude, location } = {}) => {
+    (error, {
+      latitude,
+      longitude,
+      location
+    } = {}) => {
       //if some when wrong with geocode
       if (error) {
-        return res.send({ error });
+        return res.send({
+          error
+        });
       }
-      forecast(latitude, longitude, (error, { forecast }) => {
+      forecast(latitude, longitude, (error, {
+        forecast,
+        highLow
+      }) => {
         //if some when wrong with forecast
         if (error) {
-          return res.send({ error });
+          return res.send({
+            error
+          });
         }
 
         return res.send({
           forecast: forecast,
           location: location,
-          address: req.query.address
+          address: req.query.address,
+          highLow: highLow
+
         });
       });
     }
@@ -140,3 +153,5 @@ app.listen(port, () => {
 // nodemon src/app.js
 // -e flags check is any files with listed extensions changed
 // nodemon src/app.js -e js,hbs
+
+//git push heroku master

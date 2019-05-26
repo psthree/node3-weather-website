@@ -5,7 +5,12 @@ const request = require('request');
 const forecast = (latitude, longitude, callback) => {
   const forecastUrl = `https://api.darksky.net/forecast/570dfb6f59de5ba39c823b8873c2d2ee/${latitude},${longitude}?units=us`;
   //console.log(forecastUrl);
-  request({ url: forecastUrl, json: true }, (error, { body }) => {
+  request({
+    url: forecastUrl,
+    json: true
+  }, (error, {
+    body
+  }) => {
     if (error) {
       callback('Unable to connect to Forecast services', undefined);
     } else if (body.error) {
@@ -16,8 +21,14 @@ const forecast = (latitude, longitude, callback) => {
         summary: body.daily.data[0].summary,
         temp: body.currently.temperature,
         forecast: `${body.currently.summary} It is currently ${
-          body.currently.temperature
-        }°, there is a ${body.currently.precipProbability}% chance of rain`
+          body.currently.temperature.toFixed(1)
+        }°, there is a ${
+          body.currently.precipProbability
+        }% chance of rain. 
+        `,
+        highLow: `The High will be ${
+          body.daily.data[0].temperatureHigh.toFixed(0)
+        } and the low will be ${body.daily.data[0].temperatureLow.toFixed(0)}`
       });
     }
   });
