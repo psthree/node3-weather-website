@@ -16,6 +16,8 @@ const forecast = (latitude, longitude, callback) => {
     } else if (body.error) {
       callback('Could not find the location', undefined);
     } else {
+      // this console.log will show up in server console
+      //console.log('Returned data: ', body.daily.data);
       callback(undefined, {
         location: body.timezone,
         summary: body.daily.data[0].summary,
@@ -29,7 +31,7 @@ const forecast = (latitude, longitude, callback) => {
         highLow: `The High will be ${
           body.daily.data[0].temperatureHigh.toFixed(0)
         } and the low will be ${body.daily.data[0].temperatureLow.toFixed(0)}`
-      });
+      })
     }
   });
 };
